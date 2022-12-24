@@ -16,7 +16,6 @@
   line-height: normal;
   width: 100%;
   text-align: center;
-  margin-left: 50px;
 }
 
 .lbutton {
@@ -30,7 +29,6 @@
   width: 2in;
   border: 3px dashed rgb(56, 56, 56);
   background-color:rgb(70, 70, 70);
-  margin-left: 50px;
   height: 3in;
   transition: all .2s linear;
 }
@@ -64,7 +62,6 @@
   line-height: normal;
   text-align: center;
   width: 100%;
-  margin-left: 50px;
 }
 
 .header {
@@ -81,4 +78,48 @@
   display: grid;
   grid-gap: 5px;
   transform: translate(-50%, -50%);
+}
+
+.fullscreentxt {
+  font-family: 'Product Sans';
+  font-weight: bold;
+  font-size: 2in;
+  color: white;
+  width: 100%;
+  border-style: none;
+  line-height: normal;
+  height: 100%;
+  overflow: visible;
+  text-align: center;
+  background-color: black;
+}
+
+.fullscreentxt:focus {
+  outline: none;
+}
+
+.colon {
+  font-family: 'Product Sans';
+  font-weight: bold;
+  font-size: 2in;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: white;
+  cursor: default;
+  background-color: transparent;
+  line-height: normal;
+  text-align: center;
+}
+
+.timergrid {
+  height: 50%;
+  width: auto;
+  position: absolute;
+  top: 50%;
+  border-radius: 15px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: 3in 1in 3in 1in 3in;
 }

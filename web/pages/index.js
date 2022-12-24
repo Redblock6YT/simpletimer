@@ -2,17 +2,24 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import anime from 'animejs';
+import { useRouter } from 'next/router'
 
 export default function Home() {
-  function view() {
-
+  const router = useRouter();
+  function view(a, b) {
+    animateUI();
+    setTimeout(() => {
+      if (a == "timer") {
+        router.push("/timer");
+      }
+    }, 1500);
   }
 
   function animateUI() {
     const header = document.getElementById("header");
     const buttongrid = document.getElementById("buttongrid");
     const text = document.getElementById("text");
-    const animate = text.animate({opacity: 0}, {duration: 300});
+    const animate = text.animate({ opacity: 0 }, { duration: 300 });
     animate.onfinish = () => {
       text.style.opacity = 0;
     };
@@ -47,7 +54,7 @@ export default function Home() {
           <p className={styles.subtext}>Choose between Stopwatch, Timer or Clock</p>
         </div>
         <div className={styles.buttongrid} id="buttongrid">
-          <button className={styles.lbutton} onClick={() => animateUI()}>+</button>
+          <button className={styles.lbutton} onClick={() => view("timer")}>+</button>
         </div>
       </div>
     </div>
