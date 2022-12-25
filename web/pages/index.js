@@ -12,7 +12,7 @@ export default function Home() {
       if (a == "timer") {
         router.push("/timer");
       }
-    }, 1500);
+    }, 1000);
   }
 
   function animateUI() {

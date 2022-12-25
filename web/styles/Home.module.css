@@ -8,6 +8,26 @@
   margin-left: 50px;
 }
 
+.smallmodal {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 13%;
+  height: 6%;
+  background-color: rgb(70, 70, 70);
+  border-radius: 15px;
+  border: 2px solid rgb(56, 56, 56);
+}
+
+.icongrid {
+  display: grid;
+  margin: auto;
+  margin-top: 5px;
+  grid-template-columns: auto auto auto auto;
+}
+
 .text {
   font-family: 'Product Sans';
   font-weight: bold;
