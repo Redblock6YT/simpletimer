@@ -53,30 +53,49 @@ export default function Home() {
         const timer2 = document.getElementById("timer2");
         const timer3 = document.getElementById("timer3");
         //every minute (60 seconds) timer1 will decrease by 1
+        var i = 0;
         var timer1s = setInterval(() => {
-            if (timer1t > 0) {
+            i++;
+            if (timer1t > 0 && i == 1) {
                 timer1t--;
-                anime({
-                    targets: timer1,
-                    marginBottom: "30px",
-                    opacity: "0",
-                    easing: 'easeInOutQuad',
-                    complete: () => {
-                        timer1.style.marginBottom = "-30px";
-                        timer1.value = timer1t.toString(8);
-                        anime({
-                            targets: timer1,
-                            marginBottom: "0px",
-                            opacity: "1",
-                            easing: 'easeInOutQuad',
-                        })
+                const anim = timer1.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                anim.onfinish = () => {
+                    timer1.style.marginTop = "100px";
+                    timer1.style.opacity = "0";
+                    if (timer1t < 10) {
+                        timer1.value = "0" + timer1t.toString();
+                    } else {
+                        timer1.value = timer1t.toString();
                     }
-                })
-            } else {
+                    const anim2 = timer1.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    anim2.onfinish = () => {
+                        timer1.style.marginTop = "0px";
+                        timer1.style.opacity = "1";
+                    };
+                };
+                i--;
+            } else if (timer1t == 0 && i == 1) {
                 timer2t = 59;
                 clearInterval(timer1s);
+                console.log("clear interval 1")
+                const anim = timer2.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                anim.onfinish = () => {
+                    timer2.style.marginTop = "100px";
+                    timer2.style.opacity = "0";
+                    if (timer2t < 10) {
+                        timer2.value = "0" + timer2t.toString();
+                    } else {
+                        timer2.value = timer2t.toString();
+                    }
+                    const anim2 = timer2.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    anim2.onfinish = () => {
+                        timer2.style.marginTop = "0px";
+                        timer2.style.opacity = "1";
+                    };
+                };
+                i--;
             }
-        }, timer2t * 1000000);
+        }, timer2t * 60000);
         //every 10 minutes (600 seconds) timer2 will decrease by 1
         var timer2s = setInterval(() => {
             if (timer2t > 0) {
@@ -98,8 +117,9 @@ export default function Home() {
                 };
             } else {
                 clearInterval(timer2s);
+                console.log("clear interval 2")
             }
-        }, timer1t * 10000);
+        }, 60000);
 
         //every hour (3600 seconds) timer3 will decrease by 1
         var timer3s = setInterval(() => {
@@ -139,10 +159,26 @@ export default function Home() {
                     };
                 };
             } else {
-                if (timer1t == 0 && timer2t == 0) {
-                    clearInterval(timer1s);
+                if (timer1.value == "00" && timer2.value == "00") {
+                    clearInterval(timer3s);
+                    console.log("clear interval 3")
                 }
                 timer3t = 59;
+                const anim = timer3.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                anim.onfinish = () => {
+                    timer3.style.marginTop = "100px";
+                    timer3.style.opacity = "0";
+                    if (timer3t < 10) {
+                        timer3.value = "0" + timer3t.toString();
+                    } else {
+                        timer3.value = timer3t.toString();
+                    }
+                    const anim2 = timer3.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    anim2.onfinish = () => {
+                        timer3.style.marginTop = "0px";
+                        timer3.style.opacity = "1";
+                    };
+                };
             }
         }, 1000);
     }
