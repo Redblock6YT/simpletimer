@@ -141,5 +141,5 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: grid;
-  grid-template-columns: 3in 1in 3in 1in 3in;
+  grid-template-columns: 1.3in 1.3in 1in 1.3in 1.3in 1in 1.3in 1.3in;
 }

@@ -26,22 +26,35 @@ export default function Home() {
             play.innerHTML = "play_circle";
             pause();
         } else {
-            const timer1 = document.getElementById("timer1");
-            const timer2 = document.getElementById("timer2");
-            const timer3 = document.getElementById("timer3");
-            timer1t = parseInt(timer1.value);
-            timer2t = parseInt(timer2.value);
-            timer3t = parseInt(timer3.value);
+            const timer1a = document.getElementById("timer1a");
+            const timer1b = document.getElementById("timer1b");
+            const timer2a = document.getElementById("timer2a");
+            const timer2b = document.getElementById("timer2b");
+            const timer3a = document.getElementById("timer3a");
+            const timer3b = document.getElementById("timer3b");
+
             //if any timer value is equal to "", change the value to "00"
-            if (timer1.value == "") {
-                timer1.value = "00";
+            if (timer1a.value == "") {
+                timer1a.value = "0";
             }
-            if (timer2.value == "") {
-                timer2.value = "00";
+            if (timer1b.value == "") {
+                timer1b.value = "0";
             }
-            if (timer3.value == "") {
-                timer3.value = "00";
+            if (timer2a.value == "") {
+                timer2a.value = "00";
             }
+            if (timer2b.value == "") {
+                timer2b.value = "00";
+            }
+            if (timer3a.value == "") {
+                timer3a.value = "00";
+            }
+            if (timer3b.value == "") {
+                timer3b.value = "00";
+            }
+            timer1t = parseInt(timer1a.value) + "" + parseInt(timer1b.value);
+            timer2t = parseInt(timer2a.value) + "" + parseInt(timer2b.value);
+            timer3t = parseInt(timer3a.value) + "" + parseInt(timer3b.value);
             play.innerHTML = "pause_circle"
             start();
         }
@@ -49,28 +62,38 @@ export default function Home() {
 
     function start() {
         //start the timer
-        const timer1 = document.getElementById("timer1");
-        const timer2 = document.getElementById("timer2");
-        const timer3 = document.getElementById("timer3");
+        const timer1a = document.getElementById("timer1a");
+        const timer1b = document.getElementById("timer1b");
+        const timer2a = document.getElementById("timer2a");
+        const timer2b = document.getElementById("timer2b");
+        const timer3a = document.getElementById("timer3a");
+        const timer3b = document.getElementById("timer3b");
         //every minute (60 seconds) timer1 will decrease by 1
         var i = 0;
         var timer1s = setInterval(() => {
             i++;
             if (timer1t > 0 && i == 1) {
                 timer1t--;
-                const anim = timer1.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                const anim = timer1a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
                 anim.onfinish = () => {
-                    timer1.style.marginTop = "100px";
-                    timer1.style.opacity = "0";
-                    if (timer1t < 10) {
-                        timer1.value = "0" + timer1t.toString();
-                    } else {
-                        timer1.value = timer1t.toString();
-                    }
-                    const anim2 = timer1.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    timer1a.style.marginTop = "100px";
+                    timer1a.style.opacity = "0";
+                    timer1a.value = timer1t.toString().split("")[0];
+                    const anim2 = timer1a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
                     anim2.onfinish = () => {
-                        timer1.style.marginTop = "0px";
-                        timer1.style.opacity = "1";
+                        timer1a.style.marginTop = "0px";
+                        timer1a.style.opacity = "1";
+                    };
+                };
+                const animb = timer1b.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                animb.onfinish = () => {
+                    timer1b.style.marginTop = "100px";
+                    timer1b.style.opacity = "0";
+                    timer1b.value = timer1t.toString().split("")[1];
+                    const anim2 = timer1b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    anim2.onfinish = () => {
+                        timer1b.style.marginTop = "0px";
+                        timer1b.style.opacity = "1";
                     };
                 };
                 i--;
@@ -78,41 +101,55 @@ export default function Home() {
                 timer2t = 59;
                 clearInterval(timer1s);
                 console.log("clear interval 1")
-                const anim = timer2.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                const anim = timer2a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
                 anim.onfinish = () => {
-                    timer2.style.marginTop = "100px";
-                    timer2.style.opacity = "0";
-                    if (timer2t < 10) {
-                        timer2.value = "0" + timer2t.toString();
-                    } else {
-                        timer2.value = timer2t.toString();
-                    }
-                    const anim2 = timer2.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    timer2a.style.marginTop = "100px";
+                    timer2a.style.opacity = "0";
+                    timer2a.value = timer2t.toString().split("")[0];
+                    const anim2 = timer2a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
                     anim2.onfinish = () => {
-                        timer2.style.marginTop = "0px";
-                        timer2.style.opacity = "1";
+                        timer2a.style.marginTop = "0px";
+                        timer2a.style.opacity = "1";
+                    };
+                };
+                const anim1a = timer2b.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                anim1a.onfinish = () => {
+                    timer2b.style.marginTop = "100px";
+                    timer2b.style.opacity = "0";
+                    timer2b.value = timer2t.toString().split("")[1];
+                    const anim2 = timer2b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    anim2.onfinish = () => {
+                        timer2b.style.marginTop = "0px";
+                        timer2b.style.opacity = "1";
                     };
                 };
                 i--;
             }
-        }, timer2t * 60000);
+        }, 60000);
         //every 10 minutes (600 seconds) timer2 will decrease by 1
         var timer2s = setInterval(() => {
             if (timer2t > 0) {
                 timer2t--;
-                const anim = timer2.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                const anim = timer2a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
                 anim.onfinish = () => {
-                    timer2.style.marginTop = "100px";
-                    timer2.style.opacity = "0";
-                    if (timer2t < 10) {
-                        timer2.value = "0" + timer2t.toString();
-                    } else {
-                        timer2.value = timer2t.toString();
-                    }
-                    const anim2 = timer2.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    timer2a.style.marginTop = "100px";
+                    timer2a.style.opacity = "0";
+                    timer2a.value = timer2t.toString().split("")[0];
+                    const anim2 = timer2a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
                     anim2.onfinish = () => {
-                        timer2.style.marginTop = "0px";
-                        timer2.style.opacity = "1";
+                        timer2a.style.marginTop = "0px";
+                        timer2a.style.opacity = "1";
+                    };
+                };
+                const animb = timer2b.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                animb.onfinish = () => {
+                    timer2b.style.marginTop = "100px";
+                    timer2b.style.opacity = "0";
+                    timer2b.value = timer2t.toString().split("")[1];
+                    const anim2 = timer2b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    anim2.onfinish = () => {
+                        timer2b.style.marginTop = "0px";
+                        timer2b.style.opacity = "1";
                     };
                 };
             } else {
@@ -123,62 +160,84 @@ export default function Home() {
 
         //every hour (3600 seconds) timer3 will decrease by 1
         var timer3s = setInterval(() => {
+            console.log(timer3t)
+            var i = 1;
             if (timer3t > 0) {
                 timer3t--;
-                /*
-                anime({
-                    targets: timer3,
-                    marginBottom: "30px",
-                    opacity: "0",
-                    easing: 'easeInOutQuad',
-                    complete: () => {
-                        timer3.style.marginBottom = "-30px";
-                        timer3.value = timer3t.toString();
-                        anime({
-                            targets: timer3,
-                            marginBottom: "0px",
-                            opacity: "1",
-                            easing: 'easeInOutQuad',
-                        })
-                    }
-                })
-                */
-                const anim = timer3.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
-                anim.onfinish = () => {
-                    timer3.style.marginTop = "100px";
-                    timer3.style.opacity = "0";
+                i--;
+                // if timer3t is a multiple of 10, animate the timer3a
+                if (timer3t % 10 == 0 || i == 0) {
+                    const anim = timer3a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                    anim.onfinish = () => {
+                        timer3a.style.marginTop = "100px";
+                        timer3a.style.opacity = "0";
+
+                        if (timer3t < 10) {
+                            timer3a.value = "0";
+                        } else {
+                            timer3a.value = timer3t.toString().split("")[0];
+                        }
+                        const anim2 = timer3a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                        anim2.onfinish = () => {
+                            timer3a.style.marginTop = "0px";
+                            timer3a.style.opacity = "1";
+                        };
+                    };
+                }
+                const animb = timer3b.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                animb.onfinish = () => {
+                    timer3b.style.marginTop = "100px";
+                    timer3b.style.opacity = "0";
+                    console.log("0" + timer3t.toString().split("")[0])
+                    console.log("1" + timer3t.toString().split("")[1])
                     if (timer3t < 10) {
-                        timer3.value = "0" + timer3t.toString();
+                        console.log("less than 10")
+                        timer3b.value = timer3t.toString().split("")[0];
                     } else {
-                        timer3.value = timer3t.toString();
+                        console.log("not less than 10")
+                        timer3b.value = timer3t.toString().split("")[1];
                     }
-                    const anim2 = timer3.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    const anim2 = timer3b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
                     anim2.onfinish = () => {
-                        timer3.style.marginTop = "0px";
-                        timer3.style.opacity = "1";
+                        timer3b.style.marginTop = "0px";
+                        timer3b.style.opacity = "1";
                     };
                 };
+                i++;
             } else {
-                if (timer1.value == "00" && timer2.value == "00") {
+                if (timer1a.value == "0" && timer1b.value == "0" && timer2a.value == "0" && timer2b.value == "0") {
                     clearInterval(timer3s);
                     console.log("clear interval 3")
-                }
-                timer3t = 59;
-                const anim = timer3.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
-                anim.onfinish = () => {
-                    timer3.style.marginTop = "100px";
-                    timer3.style.opacity = "0";
-                    if (timer3t < 10) {
-                        timer3.value = "0" + timer3t.toString();
-                    } else {
-                        timer3.value = timer3t.toString();
-                    }
-                    const anim2 = timer3.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
-                    anim2.onfinish = () => {
-                        timer3.style.marginTop = "0px";
-                        timer3.style.opacity = "1";
+                } else {
+                    timer3t = 59;
+                    const anim = timer3a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                    anim.onfinish = () => {
+                        timer3a.style.marginTop = "100px";
+                        timer3a.style.opacity = "0";
+                        if (timer3t < 10) {
+                            timer3a.value = "0";
+                        } else {
+                            timer3a.value = timer3t.toString().split("")[0];
+                        }
+                        const anim2 = timer3a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                        anim2.onfinish = () => {
+                            timer3a.style.marginTop = "0px";
+                            timer3a.style.opacity = "1";
+                        };
                     };
-                };
+                    const animb = timer3b.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                    animb.onfinish = () => {
+                        timer3b.style.marginTop = "100px";
+                        timer3b.style.opacity = "0";
+                        timer3b.value = timer3t.toString().split("")[1];
+                        const anim2 = timer3b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                        anim2.onfinish = () => {
+                            timer3b.style.marginTop = "0px";
+                            timer3b.style.opacity = "1";
+                        };
+                    };
+                }
+
             }
         }, 1000);
     }
@@ -209,35 +268,65 @@ export default function Home() {
     }
 
     function inputChange(a) {
-        const timer1 = document.getElementById("timer1");
-        const timer2 = document.getElementById("timer2");
-        const timer3 = document.getElementById("timer3");
+        const timer1a = document.getElementById("timer1a");
+        const timer1b = document.getElementById("timer1b");
+        const timer2a = document.getElementById("timer2a");
+        const timer2b = document.getElementById("timer2b");
+        const timer3a = document.getElementById("timer3a");
+        const timer3b = document.getElementById("timer3b");
+        const compiled1 = timer1a.value + "" + timer1b.value;
+        const compiled2 = timer2a.value + "" + timer2b.value;
+        const compiled3 = timer3a.value + "" + timer3b.value;
         const smallmodal = document.getElementById("smallmodal");
-        if (timer1.value == "00" && timer2.value == "00" && timer3.value == "00") {
+        if (compiled1 == "00" && compiled2 == "00" && compiled3 == "00") {
             animateUI("3");
         } else if (smallmodal.style.marginBottom == "-100px") {
             animateUI("2");
         }
 
         if (a == 1) {
-            if (timer1.value.length == 2) {
-                timer2.value = ""
-                timer2.focus();
+            if (timer1a.value.length == 1) {
+                timer1b.value = ""
+                timer1b.focus();
             }
         } else if (a == 2) {
-            if (timer2.value.length == 2) {
-                timer3.value = ""
-                timer3.focus();
-            } else if (timer2.value.length == 0) {
-                timer1.focus();
-                const len = timer1.value.length;
-                timer1.setSelectionRange(len, len);
+            if (timer1b.value.length == 1) {
+                timer2a.value = ""
+                timer2a.focus();
+            } else if (timer1b.value.length == 0) {
+                timer1a.focus();
+                const len = timer1a.value.length;
+                timer1a.setSelectionRange(len, len);
             }
         } else if (a == 3) {
-            if (timer3.value.length == 0) {
-                timer2.focus();
-                const len = timer2.value.length;
-                timer2.setSelectionRange(len, len);
+            if (timer2a.value.length == 1) {
+                timer2b.focus();
+            } else if (timer2a.value.length == 0) {
+                timer1b.focus();
+                const len = timer1b.value.length;
+                timer1b.setSelectionRange(len, len);
+            }
+        } else if (a == 4) {
+            if (timer2b.value.length == 1) {
+                timer3a.focus();
+            } else if (timer2b.value.length == 0) {
+                timer2a.focus();
+                const len = timer2a.value.length;
+                timer2a.setSelectionRange(len, len);
+            }
+        } else if (a == 5) {
+            if (timer3a.value.length == 1) {
+                timer3b.focus();
+            } else if (timer3a.value.length == 0) {
+                timer2b.focus();
+                const len = timer2b.value.length;
+                timer2b.setSelectionRange(len, len);
+            }
+        } else if (a == 6) {
+            if (timer3b.value.length == 0) {
+                timer3a.focus();
+                const len = timer3a.value.length;
+                timer3a.setSelectionRange(len, len);
             }
         }
     }
@@ -254,11 +343,14 @@ export default function Home() {
             </Head>
 
             <div id="body" className={styles.timergrid} style={{ opacity: 0, transform: "scale(0) translateY(-50%) translateX(-50%)" }}>
-                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(1); if (e.target.value == "00") e.target.value = "" }} id="timer1" maxlength="2" defaultValue="00" onInput={() => inputChange(1)}></input>
+                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(1); if (e.target.value == "0") e.target.value = "" }} id="timer1a" maxlength="1" defaultValue="0" onInput={() => inputChange(1)}></input>
+                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(2); if (e.target.value == "0") e.target.value = "" }} id="timer1b" maxlength="1" defaultValue="0" onInput={() => inputChange(2)}></input>
                 <input className={styles.colon} value=":" disabled></input>
-                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(2); if (e.target.value == "00") e.target.value = "" }} id="timer2" maxlength="2" defaultValue="00" onInput={() => inputChange(2)}></input>
+                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(3); if (e.target.value == "0") e.target.value = "" }} id="timer2a" maxlength="1" defaultValue="0" onInput={() => inputChange(3)}></input>
+                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(4); if (e.target.value == "0") e.target.value = "" }} id="timer2b" maxlength="1" defaultValue="0" onInput={() => inputChange(4)}></input>
                 <input className={styles.colon} value=":" disabled></input>
-                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(3); if (e.target.value == "00") e.target.value = "" }} id="timer3" maxlength="2" defaultValue="00" onInput={() => inputChange(3)}></input>
+                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(5); if (e.target.value == "0") e.target.value = "" }} id="timer3a" maxlength="1" defaultValue="0" onInput={() => inputChange(5)}></input>
+                <input className={styles.fullscreentxt} onFocus={(e) => { setCurrentFocus(6); if (e.target.value == "0") e.target.value = "" }} id="timer3b" maxlength="1" defaultValue="0" onInput={() => inputChange(6)}></input>
             </div>
             <div id="smallmodal" className={styles.smallmodal} style={{ marginBottom: "-100px" }}>
                 <div id="icongrid" className={styles.icongrid}>
