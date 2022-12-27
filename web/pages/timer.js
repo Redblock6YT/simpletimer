@@ -41,16 +41,16 @@ export default function Home() {
                 timer1b.value = "0";
             }
             if (timer2a.value == "") {
-                timer2a.value = "00";
+                timer2a.value = "0";
             }
             if (timer2b.value == "") {
-                timer2b.value = "00";
+                timer2b.value = "0";
             }
             if (timer3a.value == "") {
-                timer3a.value = "00";
+                timer3a.value = "0";
             }
             if (timer3b.value == "") {
-                timer3b.value = "00";
+                timer3b.value = "0";
             }
             timer1t = parseInt(timer1a.value) + "" + parseInt(timer1b.value);
             timer2t = parseInt(timer2a.value) + "" + parseInt(timer2b.value);
@@ -70,6 +70,42 @@ export default function Home() {
         const timer3b = document.getElementById("timer3b");
         //every minute (60 seconds) timer1 will decrease by 1
         var i = 0;
+        setTimeout(() => {
+            timer1t--;
+            timer2t = 60;
+            const anim = timer1a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+            anim.onfinish = () => {
+                timer1a.style.marginTop = "100px";
+                timer1a.style.opacity = "0";
+                if (timer1t <= 10) {
+                    timer1a.value = "0";
+                } else {
+                    timer1a.value = timer1t.toString().split("")[0];
+                }
+                const anim2 = timer1a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                anim2.onfinish = () => {
+                    timer1a.style.marginTop = "0px";
+                    timer1a.style.opacity = "1";
+                };
+            };
+            const animb = timer1b.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+            animb.onfinish = () => {
+                timer1b.style.marginTop = "100px";
+                timer1b.style.opacity = "0";
+                if (timer1t < 10) {
+                    console.log("less than 10")
+                    timer1b.value = timer1t.toString().split("")[0];
+                } else {
+                    console.log("not less than 10")
+                    timer1b.value = timer1t.toString().split("")[1];
+                }
+                const anim2 = timer1b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                anim2.onfinish = () => {
+                    timer1b.style.marginTop = "0px";
+                    timer1b.style.opacity = "1";
+                };
+            };
+        }, 1000);
         var timer1s = setInterval(() => {
             i++;
             if (timer1t > 0 && i == 1) {
@@ -78,7 +114,11 @@ export default function Home() {
                 anim.onfinish = () => {
                     timer1a.style.marginTop = "100px";
                     timer1a.style.opacity = "0";
-                    timer1a.value = timer1t.toString().split("")[0];
+                    if (timer2t <= 10) {
+                        timer1a.value = "0";
+                    } else {
+                        timer1a.value = timer1t.toString().split("")[0];
+                    }
                     const anim2 = timer1a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
                     anim2.onfinish = () => {
                         timer1a.style.marginTop = "0px";
@@ -89,7 +129,13 @@ export default function Home() {
                 animb.onfinish = () => {
                     timer1b.style.marginTop = "100px";
                     timer1b.style.opacity = "0";
-                    timer1b.value = timer1t.toString().split("")[1];
+                    if (timer1t < 10) {
+                        console.log("less than 10")
+                        timer1b.value = timer1t.toString().split("")[0];
+                    } else {
+                        console.log("not less than 10")
+                        timer1b.value = timer1t.toString().split("")[1];
+                    }
                     const anim2 = timer1b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
                     anim2.onfinish = () => {
                         timer1b.style.marginTop = "0px";
@@ -125,16 +171,24 @@ export default function Home() {
                 };
                 i--;
             }
-        }, 60000);
+        }, 3600000);
         //every 10 minutes (600 seconds) timer2 will decrease by 1
-        var timer2s = setInterval(() => {
+        var i2 = 0;
+        setTimeout(() => {
             if (timer2t > 0) {
                 timer2t--;
+                console.log("timer2t = " + timer2t)
+                console.log("i = " + i2)
                 const anim = timer2a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
                 anim.onfinish = () => {
                     timer2a.style.marginTop = "100px";
                     timer2a.style.opacity = "0";
-                    timer2a.value = timer2t.toString().split("")[0];
+
+                    if (timer2t <= 10) {
+                        timer2a.value = "0";
+                    } else {
+                        timer2a.value = timer2t.toString().split("")[0];
+                    }
                     const anim2 = timer2a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
                     anim2.onfinish = () => {
                         timer2a.style.marginTop = "0px";
@@ -145,7 +199,59 @@ export default function Home() {
                 animb.onfinish = () => {
                     timer2b.style.marginTop = "100px";
                     timer2b.style.opacity = "0";
-                    timer2b.value = timer2t.toString().split("")[1];
+                    if (timer2t < 10) {
+                        console.log("less than 10")
+                        timer2b.value = timer2t.toString().split("")[0];
+                    } else {
+                        console.log("not less than 10")
+                        timer2b.value = timer2t.toString().split("")[1];
+                    }
+                    const anim2 = timer2b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                    anim2.onfinish = () => {
+                        timer2b.style.marginTop = "0px";
+                        timer2b.style.opacity = "1";
+                    };
+                };
+            }
+        }, 1000);
+        var timer2s = setInterval(() => {
+            console.log(timer2t)
+            console.log("i2=" + i2)
+            if (timer2t > 0) {
+                timer2t--;
+                console.log("timer2t = " + timer2t)
+                console.log("i = " + i2)
+                // every 10 iterations, timer2a will decrease by 1
+                if (i2 === 10 && timer2a.value !== "0") {
+                    i2 = 0;
+                    const anim = timer2a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                    anim.onfinish = () => {
+                        timer2a.style.marginTop = "100px";
+                        timer2a.style.opacity = "0";
+
+                        if (timer2t <= 10) {
+                            timer2a.value = "0";
+                        } else {
+                            timer2a.value = timer2t.toString().split("")[0];
+                        }
+                        const anim2 = timer2a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                        anim2.onfinish = () => {
+                            timer2a.style.marginTop = "0px";
+                            timer2a.style.opacity = "1";
+                        };
+                    };
+                }
+                const animb = timer2b.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                animb.onfinish = () => {
+                    timer2b.style.marginTop = "100px";
+                    timer2b.style.opacity = "0";
+                    if (timer2t < 10) {
+                        console.log("less than 10")
+                        timer2b.value = timer2t.toString().split("")[0];
+                    } else {
+                        console.log("not less than 10")
+                        timer2b.value = timer2t.toString().split("")[1];
+                    }
                     const anim2 = timer2b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
                     anim2.onfinish = () => {
                         timer2b.style.marginTop = "0px";
@@ -153,26 +259,63 @@ export default function Home() {
                     };
                 };
             } else {
-                clearInterval(timer2s);
-                console.log("clear interval 2")
+                console.log("timer2a.value = " + timer2a.value)
+                console.log("timer2b.value = " + timer2b.value)
+                if (timer2a.value == "0" && timer2b.value == "0") {
+                    clearInterval(timer2s);
+                    console.log("clear interval 3")
+                } else {
+                    timer2t = 59;
+                    const anim = timer2a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                    anim.onfinish = () => {
+                        timer2a.style.marginTop = "100px";
+                        timer2a.style.opacity = "0";
+                        if (timer2t < 10) {
+                            timer2a.value = "0";
+                        } else {
+                            timer2a.value = timer2t.toString().split("")[0];
+                        }
+                        const anim2 = timer2a.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                        anim2.onfinish = () => {
+                            timer2a.style.marginTop = "0px";
+                            timer2a.style.opacity = "1";
+                        };
+                    };
+                    const animb = timer2b.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
+                    animb.onfinish = () => {
+                        timer2b.style.marginTop = "100px";
+                        timer2b.style.opacity = "0";
+                        timer2b.value = timer2t.toString().split("")[1];
+                        const anim2 = timer2b.animate({ marginTop: "0px", opacity: "1" }, { duration: 300, easing: "ease-in-out" });
+                        anim2.onfinish = () => {
+                            timer2b.style.marginTop = "0px";
+                            timer2b.style.opacity = "1";
+                        };
+                    };
+                }
+
             }
+            i2++;
         }, 60000);
 
         //every hour (3600 seconds) timer3 will decrease by 1
+
+        var i = 10;
         var timer3s = setInterval(() => {
             console.log(timer3t)
-            var i = 1;
             if (timer3t > 0) {
                 timer3t--;
-                i--;
-                // if timer3t is a multiple of 10, animate the timer3a
-                if (timer3t % 10 == 0 || i == 0) {
+                console.log("timer3t = " + timer3t)
+                console.log("i = " + i)
+                // every 10 iterations, timer3a will decrease by 1
+                if (i === 10 && timer3a.value !== "0") {
+                    i = 0;
                     const anim = timer3a.animate({ marginTop: "-100px", opacity: "0" }, { duration: 300, easing: "ease-in-out" });
                     anim.onfinish = () => {
                         timer3a.style.marginTop = "100px";
                         timer3a.style.opacity = "0";
 
-                        if (timer3t < 10) {
+                        if (timer3t <= 10) {
                             timer3a.value = "0";
                         } else {
                             timer3a.value = timer3t.toString().split("")[0];
@@ -188,8 +331,6 @@ export default function Home() {
                 animb.onfinish = () => {
                     timer3b.style.marginTop = "100px";
                     timer3b.style.opacity = "0";
-                    console.log("0" + timer3t.toString().split("")[0])
-                    console.log("1" + timer3t.toString().split("")[1])
                     if (timer3t < 10) {
                         console.log("less than 10")
                         timer3b.value = timer3t.toString().split("")[0];
